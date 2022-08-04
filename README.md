@@ -1,7 +1,7 @@
 # ATM-INTERFACE-AND-MANAGEMENT-SYSTEM
 ## Problem Statement
 The proposed ATM system has a drastic change to that of the older version of banking system, customer feel inconvenient with the transaction method as it was in the hands of the bank employees. In our ATM system, the above problem is overcome here, the transactions are done in person by the customer thus makes the customers feel safe and secure. Thus the application of our system helps the customer in creating the account, checking the balance and transaction of the amount by validating the pin number and also can log out the user therefore our ATM system is more user friendly.
-##PURPOSE
+## PURPOSE
 In Java, we created an ATM program for representing ATM transactions. In the ATM program, the user has to select an option from the options displayed on the screen. The options are related to account sign-up or login or reset pin, withdraw the money, deposit the money, check the balance, and logout.
 
 1.	The java Program can Display the ATM Transaction.
