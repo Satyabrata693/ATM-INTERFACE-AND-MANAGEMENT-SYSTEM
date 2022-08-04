@@ -1,0 +1,270 @@
+import java.util.*;
+public class ATM {
+
+    public static void main(String[] args) {
+        Menu menu_object =new Menu();
+        menu_object.firstinterface();
+    }
+}
+
+class Menu extends Transactions
+{
+    Scanner input=new Scanner(System.in);
+
+    HashMap<Integer, Integer> details=new HashMap<Integer, Integer>();
+    Menu(){
+        details.put(1234, 123);
+        details.put(91234, 1234);
+        details.put(95678, 5678);
+    }
+    int id;
+    int pin;
+    int newid;
+    int newpin;
+
+    void firstinterface()
+    {
+        System.out.println("Do you want to sign-up or Login?\nPress 1 to Sign-up\nPress 2 to login\nPress 3 to Reset your pin");
+        System.out.print("Please enter required option : ");
+        Scanner in=new Scanner(System.in);
+        int o=in.nextInt();
+        if(o==1)
+            signup();
+        else if(o==2)
+            login();
+        else if(o==3)
+            pinchange();
+    }
+
+    public void signup()
+    {
+        System.out.print("\nHow many accounts do you want to create: ");
+        int ac=input.nextInt();
+
+        for(int i=0;i<ac;++i) {
+
+            System.out.print("Please enter new ID : ");
+            newid=input.nextInt();
+            System.out.print("Please enter new pin : ");
+            newpin=input.nextInt();
+            details.put(newid,newpin);}
+
+        login();
+    }
+
+    public void pinchange()
+    {
+        System.out.println("Please enter ID of which you want to change pin : ");
+        int tochngid=input.nextInt();
+        if(details.containsKey(tochngid)) {
+            System.out.println("Please enter the new pin : ");
+            int newpin=input.nextInt();
+            details.put(tochngid, newpin);
+            System.out.print("\n\nWe have successfully changed your pin :)");
+            login();
+        }
+        else {
+            System.out.println("The given id is not registered in this bank!. Please sign-up before you proceed ");
+            signup();
+        }
+    }
+
+    public void login()
+    {
+        System.out.println("\n*** Welcome To ATM  *** ");
+        System.out.print("Please enter your ID : ");
+
+        id=input.nextInt();
+        System.out.print("Please enter your pin : ");
+
+        pin=input.nextInt();
+
+        if (details.containsKey(id) && details.get(id)==pin)
+        {
+
+            Options(id);
+        }
+        else
+        {
+            //if id or pin is wrong print a message and goto to login method
+            System.out.println(":( Invalid User ID or pin ! \npress 1 if you want to signup\nPress 2 if you want to re-try");
+            int inopt=input.nextInt();
+            if(inopt==1)
+                signup();
+            else if(inopt==2)
+                login();
+        }
+    }
+
+    public void Options(int id)
+    {
+
+        int option;
+
+        System.out.println("\nOptions :\nPress 1 for Balance Enquiry\nPress 2 for Deposit money \nPress 3 for Withdraw money\nPress 4 for Logout\nPress 5 to reset your pin");
+        System.out.print("Please enter required option : ");
+
+        option=input.nextInt();
+
+        switch(option)
+        {
+            case 1:
+                Account_types(option,id);
+
+                break;
+            case 2: //Deposit money
+                Account_types(option,id);
+                break;
+            case 3: //Withdraw money
+                Account_types(option,id);
+                break;
+            case 4: System.out.println("Thank you Have A Nice Day :) \n");
+                firstinterface();
+                break;
+            case 5: pinchange();
+                break;
+            default: System.out.println(":(  Invalid option! \nPlease enter proper option: " );
+                Options(id);
+        }
+    }
+
+    public void Account_types(int option_1,int id)
+    {
+
+        int option_2;
+
+        System.out.println("Account Types : \nPress 1 for Current account\nPress 2 for Savings account \nPress 3 for Exit ");
+        System.out.print("Please enter your option : ");
+
+        option_2=input.nextInt();
+        switch(option_2)
+        {
+            case 1: //this case is for Current account
+                if(option_1==1)
+                {
+
+                    Current_account_Balance_enquiry(id);
+                }
+                else if(option_1==2)
+                {
+
+                    Current_account_Deposit_money(id);
+                }
+                else
+                {
+
+                    Current_account_Withdraw_money(id);
+                }
+                Options(id);
+                break;
+            case 2:
+                if(option_1==1)
+                    Savings_account_Balance_enquiry(id);
+                else if(option_1==2)
+                    Savings_account_Deposit_money(id);
+                else
+                    Savings_account_Withdraw_money(id);
+                Options(id);
+                break;
+            case 3:
+                firstinterface();
+                break;
+            default:
+                System.out.println(":(  Invalid option! \nPlease enter proper option: ");
+                Options(id);
+        }
+    }
+}
+class Transactions
+{
+
+    HashMap<Integer, Integer> sac=new HashMap<Integer, Integer>();
+    HashMap<Integer, Integer> cac=new HashMap<Integer, Integer>();
+
+    int amount=0;
+    int Current_balance=0;
+    int Savings_balance=0;
+    Scanner input=new Scanner(System.in);
+
+    public void Current_account_Balance_enquiry(int id)
+    {
+        System.out.println("Your Current account balance is: Rs "+ cac.get(id));
+    }
+
+    public void Savings_account_Balance_enquiry(int id)
+    {
+        System.out.println("Your Savings account balance is: Rs "+ sac.get(id));
+    }
+
+    public void Current_account_Deposit_money(int id)
+    {
+        System.out.print("Please enter amount for deposit: Rs ");
+        amount=input.nextInt();
+        if(cac.containsKey(id))
+        {
+            Current_balance=cac.get(id)+amount;
+            cac.put(id,Current_balance);
+            //Current_balance=0;
+            System.out.println("Your amount is successfully deposited :)");
+        }
+        else {
+            cac.put(id, amount);
+            //Current_balance+=amount;
+            System.out.println("Your amount is successfully deposited :)");
+        }
+    }
+
+    public void Savings_account_Deposit_money(int id)
+    {
+        System.out.print("Please enter amount for deposit: Rs ");
+        amount=input.nextInt();
+        //Savings_balance+=amount;
+        if(sac.containsKey(id))
+        {
+            Savings_balance=sac.get(id)+amount;
+            sac.put(id,Savings_balance);
+            //Current_balance=0;
+            System.out.println("Your amount is successfully deposited :)");
+        }
+        else {
+            sac.put(id,amount);
+            System.out.println("Your amount is successfully deposited :)");
+        }
+    }
+
+    public void Current_account_Withdraw_money(int id)
+    {
+        System.out.print("Please enter amount for withdraw : Rs ");
+        amount=input.nextInt();
+
+        if(cac.containsKey(id)&&(cac.get(id))-amount>=0)
+        {
+            Current_balance=cac.get(id)-amount;
+            cac.put(id,Current_balance);
+            //Current_balance=0;
+            System.out.println("Your amount is successfully deducted :)");
+        }
+        else
+        {
+            System.out.println("Insufficient balance to withdraw :(");
+        }
+    }
+    //method for withdraw money from Savings account
+    public void Savings_account_Withdraw_money(int id)
+    {
+        System.out.print("Please enter amount for withdraw : Rs ");
+        amount=input.nextInt();
+        //checking balance
+        if(sac.containsKey(id)&&(sac.get(id))-amount>=0)
+        {
+            Savings_balance=sac.get(id)-amount;
+            cac.put(id,Savings_balance);
+            //Current_balance=0;
+            System.out.println("Your amount is successfully deducted :)");
+        }
+        else
+        {
+            System.out.println("Insufficient balance to withdraw :(");
+        }
+    }
+}
