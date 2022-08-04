@@ -12,12 +12,12 @@ In Java, we created an ATM program for representing ATM transactions. In the ATM
 6.	The user can check the bank account balance.
 7.	Then the user can also log out his/her account.
 
--The user can simply sign-up or login or reset pin, his/her account by choosing the options.
+- The user can simply sign-up or login or reset pin, his/her account by choosing the options.
 
--ATM users can deposit money to the bank by choosing the deposit option. The java program will simply get the deposit amount from the user and add the money to the user's account.
+- ATM users can deposit money to the bank by choosing the deposit option. The java program will simply get the deposit amount from the user and add the money to the user's account.
 
--Users can withdraw money from their bank account through the program by selecting the withdrawal option. After a successful transaction, the ATM machine will deduct the amount from the central bank account.
+- Users can withdraw money from their bank account through the program by selecting the withdrawal option. After a successful transaction, the ATM machine will deduct the amount from the central bank account.
 
--The user can also check their existing bank account total balance using the checking account balance option. 
+- The user can also check their existing bank account total balance using the checking account balance option. 
 
--Finally, the logout option will simply logout the users from the ATM machine program and return the user to the default main menu.
+- Finally, the logout option will simply logout the users from the ATM machine program and return the user to the default main menu.
